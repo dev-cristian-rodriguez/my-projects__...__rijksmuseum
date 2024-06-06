@@ -108,28 +108,46 @@ export const Login = () => {
       await fetch("/api/login", {
         method: "POST",
         body: JSON.stringify(form),
-      });
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status === "fulfilled") {
+            Cookies.set("email", form.email, { expires: 30 });
 
-      Cookies.set("email", form.email, { expires: 30 });
+            setBorderColorInputEmail("border-green-500");
+            setBorderColorInputPassword("border-green-500");
 
-      setBorderColorInputEmail("border-green-500");
-      setBorderColorInputPassword("border-green-500");
+            // opacity exclamation
+            setOpacityExclamationEmail(0);
+            setOpacityExclamationPassword(0);
 
-      // opacity exclamation
-      setOpacityExclamationEmail(0);
-      setOpacityExclamationPassword(0);
+            setVerifiedLogin(true);
 
-      setVerifiedLogin(true);
+            toast.success("Verificación exitosa.", {
+              duration: 3000,
+            });
 
-      toast.success("Verificación exitosa.", {
-        duration: 3000,
-      });
+            setTimeout(() => {
+              setExecutionEndpointCall(false);
+              setLoading(false);
+              router.push("/web/all-art-works");
+            }, 2000);
+          } else {
+            setExecutionEndpointCall(false);
+            setLoading(false);
 
-      setTimeout(() => {
-        setExecutionEndpointCall(false);
-        setLoading(false);
-        router.push("/web/all-art-works");
-      }, 2000);
+            setBorderColorInputEmail("border-[#DC2626]");
+            setBorderColorInputPassword("border-[#DC2626]");
+
+            // opacity exclamation
+            setOpacityExclamationEmail(1);
+            setOpacityExclamationPassword(1);
+
+            toast.error("Error al intentar loguearte", {
+              duration: 4000,
+            });
+          }
+        });
     }
   }
 
