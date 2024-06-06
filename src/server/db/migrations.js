@@ -10,6 +10,9 @@ async function migrations() {
     host: process.env.DB_HOST,
     database: process.env.DB_NAME,
     port: process.env.DB_PORT,
+    ssl: {
+      rejectUnauthorized: false, // Agrega esta línea
+    },
   });
 
   try {

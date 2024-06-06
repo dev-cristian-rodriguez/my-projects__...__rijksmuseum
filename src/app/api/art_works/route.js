@@ -7,6 +7,9 @@ export async function GET(request) {
     host: process.env.DB_HOST,
     database: process.env.DB_NAME,
     port: process.env.DB_PORT,
+    ssl: {
+      rejectUnauthorized: false, // Agrega esta línea
+    },
   });
 
   try {
@@ -39,6 +42,9 @@ export async function POST(request) {
     host: process.env.DB_HOST,
     database: process.env.DB_NAME,
     port: process.env.DB_PORT,
+    ssl: {
+      rejectUnauthorized: false, // Agrega esta línea
+    },
   });
 
   const requestBody = await request.json();
@@ -108,6 +114,9 @@ export async function DELETE(request) {
     host: process.env.DB_HOST,
     database: process.env.DB_NAME,
     port: process.env.DB_PORT,
+    ssl: {
+      rejectUnauthorized: false, // Agrega esta línea
+    },
   });
 
   try {
