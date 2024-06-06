@@ -2,14 +2,7 @@ import { Client } from "pg";
 
 export async function POST(request) {
   const client = new Client({
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    port: process.env.DB_PORT,
-    ssl: {
-      rejectUnauthorized: false, // Agrega esta línea
-    },
+    connectionString: process.env.CONNECTION_STRING,
   });
 
   const requestBody = await request.json();
@@ -20,7 +13,6 @@ export async function POST(request) {
     const user = await client.query("SELECT * FROM users WHERE email = $1", [
       requestBody.email,
     ]);
-
 
     if (user.rowCount === 0) {
       await client.query(`INSERt INTO users(email, password) VALUES ($1, $2)`, [
