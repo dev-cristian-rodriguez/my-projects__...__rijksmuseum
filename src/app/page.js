@@ -130,7 +130,7 @@ export const Login = () => {
             setTimeout(() => {
               setExecutionEndpointCall(false);
               setLoading(false);
-              router.push("/web/all-art-works");
+              router.push("/web/home");
             }, 2000);
           } else {
             setExecutionEndpointCall(false);
