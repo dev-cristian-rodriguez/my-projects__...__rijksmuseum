@@ -15,7 +15,7 @@ export async function POST(request) {
     ]);
 
     if (user.rowCount === 0) {
-      await client.query(`INSERt INTO users(email, password) VALUES ($1, $2)`, [
+      await client.query(`INSERT INTO users(email, password) VALUES ($1, $2)`, [
         requestBody.email,
         requestBody.password,
       ]);
