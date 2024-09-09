@@ -2,21 +2,22 @@
 
 import Cookies from "js-cookie";
 import ReactCountryFlag from "react-country-flag";
+import Image from "next/image"
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
 import {
   XMarkIcon,
   ChatBubbleOvalLeftEllipsisIcon,
-  PlusIcon,
-  TagIcon,
-  TrashIcon,
   ClipboardDocumentIcon,
 } from "@heroicons/react/24/outline";
 
 import ModalManager from "../modal-manager/modal-manager";
 
 import Loader from "../../common/loader";
-import { toast } from "sonner";
+
 import store from "@/app/web-modules/store/index.store";
+
+import defatulImage from "@/app/web-modules/assets/images/default_image.jpg"
 
 export default function UserData({ visibility }) {
   const emailCookie = Cookies.get("email");
@@ -85,12 +86,14 @@ export default function UserData({ visibility }) {
 
         <aside className="px-[40px]">
           <section className="relative inline-block">
-            <img
+            <Image src={defatulImage} width={85} className="border-[4px] border-[#ffffff] rounded-[50%] mt-[-24px]" />
+
+            {/* <img
               className="border-[4px] border-[#ffffff] rounded-[50%] mt-[-24px]"
-              src="https://s3-alpha-sig.figma.com/img/3d5c/b72f/ae1e058c2ed75ab981a9f8bb62e96a13?Expires=1718582400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=G4Wxo0rHz4iqEmtwGEmyjn19vkR3ro16vKHKvFRgrfFW0Y8beVAY0AOxfckZO5wZduJd9onlS0uLLGm62jHyN-O--4yFruefmR4QGAFk3PXlEaqaMd3yII8~DPaYei03IOJAyseaxF5N0ZCDsSc7TbDXboMXj5Qu-FRBjP5bmxUqutt8dqKWD1LCtpiEr77Uyeo6sgLMQ0iPBtFM28lL7nF4L0l9u2v884XUz3Bid~N-36xlhY3~Nk0elg26rmYPZZ-RuY3Se6dvMcV6342tMLftfopqozccm-Hano4BZG~vxooDq~ky9GRnzLHFD~RaOGXL7Y7r4GL5mTxADJx8XQ__"
-              alt="robot icon"
+              src={defatulImage}
+              alt="robot_icon"
               width={72}
-            />
+            /> */}
 
             <ReactCountryFlag
               countryCode="CO"
@@ -164,9 +167,8 @@ export default function UserData({ visibility }) {
                 />
                 <div className="ml-[10px] relative">
                   <p
-                    className={`absolute top-[-30px] bg-[#6564DB] text-[#ffffff] text-[11px] rounded-[6px] px-[10px] py-[5px] transition-opacity duration-500 ${
-                      copyIcon1 ? "opacity-100" : "opacity-0 invisible"
-                    }`}
+                    className={`absolute top-[-30px] bg-[#6564DB] text-[#ffffff] text-[11px] rounded-[6px] px-[10px] py-[5px] transition-opacity duration-500 ${copyIcon1 ? "opacity-100" : "opacity-0 invisible"
+                      }`}
                   >
                     Copiado
                   </p>
@@ -201,9 +203,8 @@ export default function UserData({ visibility }) {
                 />
                 <div className="ml-[10px] relative">
                   <p
-                    className={`absolute top-[-30px] bg-[#6564DB] text-[#ffffff] text-[11px] rounded-[6px] px-[10px] py-[5px] transition-opacity duration-500 ${
-                      copyIcon2 ? "opacity-100" : "opacity-0 delay-500"
-                    } ${copyIcon2 ? "visible" : "invisible"}`}
+                    className={`absolute top-[-30px] bg-[#6564DB] text-[#ffffff] text-[11px] rounded-[6px] px-[10px] py-[5px] transition-opacity duration-500 ${copyIcon2 ? "opacity-100" : "opacity-0 delay-500"
+                      } ${copyIcon2 ? "visible" : "invisible"}`}
                   >
                     Copiado
                   </p>
@@ -235,11 +236,10 @@ export default function UserData({ visibility }) {
               </button>
               <button
                 onClick={onClickUpdateUser}
-                className={`py-[6px] w-[47%] text-[#FFFFFF] text-[17px] font-normal rounded-[4px] border-[1px] transition-[background-color] duration-[0.15s] ease-[ease-in-out] ${
-                  loader
-                    ? "bg-[#595bbf] cursor-default"
-                    : "bg-[#6465DB] hover:bg-[#595bbf]"
-                } `}
+                className={`py-[6px] w-[47%] text-[#FFFFFF] text-[17px] font-normal rounded-[4px] border-[1px] transition-[background-color] duration-[0.15s] ease-[ease-in-out] ${loader
+                  ? "bg-[#595bbf] cursor-default"
+                  : "bg-[#6465DB] hover:bg-[#595bbf]"
+                  } `}
               >
                 {loader ? (
                   <div className="flex justify-center">
