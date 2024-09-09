@@ -33,14 +33,12 @@ export function Layout({ children }) {
   const store_popUp_user_data = store((state) => state.popUp_user_data);
 
   const [openMenuProfile, setOpenMenuProfile] = useState(false);
-  const [openMenuLenguage, setOpenMenuLenguage] = useState(false);
   const [openMenuArtWorks, setopenMenuArtWorks] = useState(false);
 
   const menuArtWorks = useRef(null);
   const buttonmenuArtWorks = useRef(null);
 
   const menuProfileRef = useRef(null);
-  const menuLenguageRef = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -49,13 +47,6 @@ export function Layout({ children }) {
         !menuProfileRef.current.contains(event.target)
       ) {
         setOpenMenuProfile(false);
-      }
-
-      if (
-        menuLenguageRef.current &&
-        !menuLenguageRef.current.contains(event.target)
-      ) {
-        setOpenMenuLenguage(false);
       }
 
       if (
@@ -98,148 +89,81 @@ export function Layout({ children }) {
           alt="logo"
         />
 
-        <article className="flex">
-          <section className="flex items-center relative mr-[33px]">
-            <GlobeAltIcon
-              className="mr-[7px]"
-              width={25}
-              height={25}
+        <section className="flex items-center relative">
+          <UserIcon
+            className="bg-[#29294b] rounded-[50%] p-[5px]"
+            width={30}
+            height={30}
+            color="white"
+          />
+
+          <h1 className="text-[#ffffff] text-[14px] font-normal  mx-[13px] ">
+            Dev user
+          </h1>
+
+          {openMenuProfile ? (
+            <ChevronUpIcon
+              width={16}
               color="white"
-            />
-            {openMenuLenguage ? (
-              <ChevronUpIcon
-                width={16}
-                color="white"
-                cursor={"pointer"}
-                onClick={() =>
-                  openMenuLenguage
-                    ? setOpenMenuLenguage(false)
-                    : setOpenMenuLenguage(true)
-                }
-              />
-            ) : (
-              <ChevronDownIcon
-                width={16}
-                color="white"
-                cursor={"pointer"}
-                onClick={() =>
-                  openMenuLenguage
-                    ? setOpenMenuLenguage(false)
-                    : setOpenMenuLenguage(true)
-                }
-              />
-            )}
-
-            <aside
-              ref={menuLenguageRef}
-              className={`absolute bottom-[-154px] left-[-105px] w-[160px] rounded-[10px] py-[12px] pl-[20px] shadow-[0_5px_15px_5px_rgba(0,0,0,0.3)] bg-white transition-all duration-500 ease-in-out  ${
-                openMenuLenguage
-                  ? "block translate-y-[0px] opacity-[1]"
-                  : "opacity-[0] translate-y-[-20px] invisible"
-              }`}
-            >
-              <div>
-                <p className="cursor-pointer text-[15px] text-[#1A1A32] mb-[16px] transition-color duration-500  hover:text-[#4a4ac7]">
-                  Spanish
-                </p>
-
-                <p className="cursor-pointer text-[15px] text-[#1A1A32] mb-[16px] transition-color duration-500  hover:text-[#4a4ac7]">
-                  English
-                </p>
-                <p className="cursor-pointer text-[15px] text-[#1A1A32] mb-[6px] transition-color duration-500  hover:text-[#4a4ac7]">
-                  Portuguese
-                </p>
-              </div>
-            </aside>
-          </section>
-
-          <section className="flex items-center relative">
-            <UserIcon
-              className="bg-[#6564db] rounded-[50%] p-[5px]"
-              width={30}
-              height={30}
-              color="white"
-            />
-
-            <h1 className="text-[#ffffff] text-[14px] font-normal  mx-[13px] ">
-              Dev user
-            </h1>
-
-            {openMenuProfile ? (
-              <ChevronUpIcon
-                width={16}
-                color="white"
-                cursor={"pointer"}
-                onClick={() =>
-                  openMenuProfile
-                    ? setOpenMenuProfile(false)
-                    : setOpenMenuProfile(true)
-                }
-              />
-            ) : (
-              <ChevronDownIcon
-                width={16}
-                color="white"
-                cursor={"pointer"}
-                onClick={() =>
-                  openMenuProfile
-                    ? setOpenMenuProfile(false)
-                    : setOpenMenuProfile(true)
-                }
-              />
-            )}
-            <aside
-              ref={menuProfileRef}
-              className={`absolute bottom-[-154px] left-[-16px] w-[165px] rounded-[10px] py-[12px] pl-[20px] shadow-[0_5px_15px_5px_rgba(0,0,0,0.3)] bg-white transition-all duration-500 ease-in-out  ${
+              cursor={"pointer"}
+              onClick={() =>
                 openMenuProfile
-                  ? "block translate-y-[0px] opacity-[1]"
-                  : "opacity-[0] translate-y-[-20px] invisible"
+                  ? setOpenMenuProfile(false)
+                  : setOpenMenuProfile(true)
+              }
+            />
+          ) : (
+            <ChevronDownIcon
+              width={16}
+              color="white"
+              cursor={"pointer"}
+              onClick={() =>
+                openMenuProfile
+                  ? setOpenMenuProfile(false)
+                  : setOpenMenuProfile(true)
+              }
+            />
+          )}
+          <aside
+            ref={menuProfileRef}
+            className={`absolute bottom-[-114px] left-[-16px] w-[165px] rounded-[10px] py-[12px] pl-[20px] shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] bg-white transition-all duration-500 ease-in-out  ${openMenuProfile
+              ? "block translate-y-[0px] opacity-[1]"
+              : "opacity-[0] translate-y-[-20px] invisible"
               }`}
-            >
-              <div>
-                <p
-                  onClick={() => {
-                    store.setState({ popUp_user_data: { visibility: true } });
-                  }}
-                  className="cursor-pointer text-[15px] text-[#1A1A32] mb-[16px] transition-color duration-500  hover:text-[#4a4ac7]"
-                >
-                  Mi cuenta
-                </p>
+          >
+            <div>
+              <p
+                onClick={() => {
+                  store.setState({ popUp_user_data: { visibility: true } });
+                }}
+                className="cursor-pointer text-[15px] text-[#1A1A32] mb-[16px] transition-color duration-500  hover:text-[#4a4ac7]"
+              >
+                Mi cuenta
+              </p>
 
-                <p
-                  onClick={() => {
-                    store.setState({ popUp_user_data: { visibility: true } });
-                  }}
-                  className="cursor-pointer text-[15px] text-[#1A1A32] mb-[16px] transition-color duration-500  hover:text-[#4a4ac7]"
-                >
-                  Editar perfil
-                </p>
-                <p
-                  onClick={() => {
-                    Cookies.remove("email");
-                    router.push("/");
-                  }}
-                  className="cursor-pointer text-[15px] text-[#1A1A32] mb-[6px] transition-color duration-500  hover:text-[#4a4ac7]"
-                >
-                  Cerrar sesión
-                </p>
-              </div>
-            </aside>
-          </section>
-        </article>
+              <p
+                onClick={() => {
+                  Cookies.remove("email");
+                  router.push("/");
+                }}
+                className="cursor-pointer text-[15px] text-[#1A1A32] mb-[6px] transition-color duration-500  hover:text-[#4a4ac7]"
+              >
+                Cerrar sesión
+              </p>
+            </div>
+          </aside>
+        </section>
       </nav>
 
       <aside className="pt-[58px] pl-[50px]">
         <div
-          className={`relative transition-blur duration-500 ${
-            openMenuArtWorks ? "blur-[4px]" : ""
-          }`}
+          className={`relative transition-blur duration-500 ${openMenuArtWorks ? "blur-[4px]" : ""
+            }`}
         >
           {children}
           <div
-            className={`absolute top-0 w-full h-full z-[3] opacity-[0] ${
-              openMenuArtWorks ? "block" : "hidden"
-            }`}
+            className={`absolute top-0 w-full h-full z-[3] opacity-[0] ${openMenuArtWorks ? "block" : "hidden"
+              }`}
           ></div>
         </div>
       </aside>
@@ -250,22 +174,19 @@ export function Layout({ children }) {
             <div>
               <HomeIcon
                 onClick={() => router.push("/web/home")}
-                className={`${
-                  openMenuArtWorks ? "mb-[8px]" : "mb-[2px]"
-                } p-[5px] rounded-[3px] cursor-pointer transition-background transition-scale transition-margin duration-[0.3s] hover:bg-[#34345e] hover:scale-[0.9] `}
+                className={`${openMenuArtWorks ? "mb-[8px]" : "mb-[2px]"
+                  } p-[5px] rounded-[3px] cursor-pointer transition-background transition-scale transition-margin duration-[0.3s] hover:bg-[#34345e] hover:scale-[0.9] `}
                 width={34}
                 color="white"
               />
 
               <AcademicCapIcon
                 ref={buttonmenuArtWorks}
-                className={`${
-                  openMenuArtWorks ? "mb-[8px]" : "mb-[2px]"
-                } p-[5px] rounded-[3px] cursor-pointer transition-background transition-scale transition-margin duration-[0.4s] ${
-                  openMenuArtWorks
+                className={`${openMenuArtWorks ? "mb-[8px]" : "mb-[2px]"
+                  } p-[5px] rounded-[3px] cursor-pointer transition-background transition-scale transition-margin duration-[0.4s] ${openMenuArtWorks
                     ? "scale-[1.2] bg-[#4e4e7c]"
                     : "hover:scale-[0.9] hover:bg-[#34345e]"
-                } `}
+                  } `}
                 width={34}
                 onClick={() =>
                   openMenuArtWorks
@@ -288,11 +209,10 @@ export function Layout({ children }) {
           {/* SECTION: ARTWORKS */}
           <section
             ref={menuArtWorks}
-            className={`absolute top-0 left-[51px] z-[6] flex-col pt-[78px] w-[190px]  pb-[10px] h-[100vh] border-solid border-r-[2px] bg-white shadow-[5px_0px_16px_rgba(0,0,0,0.2)] transition-all duration-[0.5s] ${
-              openMenuArtWorks
-                ? "w-[190px] opacity-[1] translate-x-0 animate-increseWidth"
-                : "w-[220px] opacity-[0] translate-x-[10%] invisible"
-            }`}
+            className={`absolute top-0 left-[51px] z-[6] flex-col pt-[78px] w-[190px]  pb-[10px] h-[100vh] border-solid border-r-[2px] bg-white shadow-[5px_0px_16px_rgba(0,0,0,0.2)] transition-all duration-[0.5s] ${openMenuArtWorks
+              ? "w-[190px] opacity-[1] translate-x-0 animate-increseWidth"
+              : "w-[220px] opacity-[0] translate-x-[10%] invisible"
+              }`}
           >
             <div
               onClick={() => {

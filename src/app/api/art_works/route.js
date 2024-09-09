@@ -2,7 +2,7 @@ import { Client } from "pg";
 
 export async function GET(request) {
   const client = new Client({
-    connectionString: process.env.CONNECTION_STRING,
+    connectionString: `${process.env.CONNECTION_STRING}`,
   });
 
   try {
