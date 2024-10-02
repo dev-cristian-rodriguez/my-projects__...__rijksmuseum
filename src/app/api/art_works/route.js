@@ -17,7 +17,7 @@ export async function GET(request) {
 
     const getArtworks = await client.query(
       `SELECT * FROM art_works WHERE user_id = $1`,
-      [user.rows[0].id]
+      [user.rows[0].id],
     );
 
     return Response.json({ status: "fulfilled", result: getArtworks.rows });
@@ -44,7 +44,7 @@ export async function POST(request) {
 
     const getArtworksOfUser = await client.query(
       `SELECT * FROM art_works WHERE user_id = $1`,
-      [user.rows[0].id]
+      [user.rows[0].id],
     );
 
     const values = [
@@ -59,7 +59,7 @@ export async function POST(request) {
     if (getArtworksOfUser.rowCount === 0) {
       await client.query(
         `INSERT INTO art_works(id_original, link, title, principal_or_first_maker, image_url, user_id) VALUES ($1, $2, $3, $4, $5, $6)`,
-        values
+        values,
       );
       return Response.json({
         status: "fulfilled",
@@ -68,12 +68,12 @@ export async function POST(request) {
     } else {
       const artWorkAlreadyExists = await client.query(
         `SELECT * FROM art_works WHERE id_original = $1 AND user_id = $2`,
-        [requestBody.id_original, user.rows[0].id]
+        [requestBody.id_original, user.rows[0].id],
       );
       if (!artWorkAlreadyExists.rowCount) {
         await client.query(
           `INSERT INTO art_works(id_original, link, title, principal_or_first_maker, image_url, user_id) VALUES ($1, $2, $3, $4, $5, $6)`,
-          values
+          values,
         );
         return Response.json({
           status: "fulfilled",
@@ -111,7 +111,7 @@ export async function DELETE(request) {
 
     await client.query(
       `DELETE FROM art_works WHERE id_original = $1 AND user_id = $2`,
-      [art_work_id, user.rows[0].id]
+      [art_work_id, user.rows[0].id],
     );
 
     return Response.json({ status: "fulfilled", message: "Artwork deleted" });

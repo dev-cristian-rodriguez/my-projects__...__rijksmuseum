@@ -1,6 +1,8 @@
 "use client";
 
 import Select from "react-select";
+import Cookies from "js-cookie";
+
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import {
@@ -12,10 +14,12 @@ import {
   TrashIcon,
   ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
-import Cookies from "js-cookie";
 
 import store from "@/app/web-modules/store/index.store";
-import customStylesSelect from "@/app/web-modules/components/select/custom-styles-select";
+import {
+  theme,
+  generalSelectStyle,
+} from "@/app/web-modules/components/select/custom-styles-select";
 
 export default function MyArtWork() {
   const router = useRouter();
@@ -74,14 +78,14 @@ export default function MyArtWork() {
             (art_work) =>
               art_work.title
                 .slice(0, inputSearch.length)
-                .toLocaleLowerCase() === inputSearch
+                .toLocaleLowerCase() === inputSearch,
           );
         case "principal_or_first_maker":
           return store_my_art_works.result?.filter(
             (art_work) =>
               art_work.principal_or_first_maker
                 .slice(0, inputSearch.length)
-                .toLocaleLowerCase() === inputSearch
+                .toLocaleLowerCase() === inputSearch,
           );
       }
     } else {
@@ -91,7 +95,7 @@ export default function MyArtWork() {
             inputSearch ||
           art_work.principal_or_first_maker
             .slice(0, inputSearch.length)
-            .toLocaleLowerCase() === inputSearch
+            .toLocaleLowerCase() === inputSearch,
       );
     }
   }
@@ -141,7 +145,7 @@ export default function MyArtWork() {
   ];
 
   return (
-    <main className="ml-[20px] mr-[24px] mt-[15px]">
+    <main className="mx-[24px] my-[18px]">
       <h1 className="text-[#1A1A32] text-[24px] font-semibold mb-[7px]">
         Mis obras de arte
       </h1>
@@ -205,16 +209,9 @@ export default function MyArtWork() {
                   Selecciona una opción
                 </p>
               }
-              theme={(theme) => ({
-                ...theme,
-                colors: {
-                  ...theme.colors,
-                  primary25: "#f0f0f4",
-                  primary: "#d2d2d3",
-                },
-              })}
+              theme={theme}
               options={filterOptions}
-              styles={customStylesSelect}
+              styles={generalSelectStyle}
               maxMenuHeight={190}
               onChange={onChangeSelectFilter}
             />
@@ -265,11 +262,9 @@ export default function MyArtWork() {
                 <div className="grid grid-cols-4 gap-4 py-[4px] transition-background duration-[0.2s] hover:bg-[#f2f3f6]">
                   <div className="flex items-center">
                     <img
-                      className="rounded-[50%]"
-                      width={30}
-                      height={100}
-                      alt="contact-img"
-                      src="https://i0.wp.com/culturacolectiva.com/wp-content/uploads/2023/02/5SD7TGOJ2BFCBIDWUDRYHK7ROU.jpg"
+                      className="rounded-[50%] w-[35px] h-[35px] object-cover"
+                      alt="artWorkImg"
+                      src={index.image_url}
                     />
                     <h2 className="text-[#838D96] text-[14px] font-[500] ml-[9px]">
                       {index.title
@@ -284,7 +279,7 @@ export default function MyArtWork() {
                       {index.principal_or_first_maker.length > 20
                         ? `${index.principal_or_first_maker.substring(
                             0,
-                            20
+                            20,
                           )} . . .`
                         : index.principal_or_first_maker}
                     </h2>

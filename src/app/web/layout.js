@@ -28,7 +28,7 @@ export function Layout({ children }) {
   // Initial visibility states of each pop-up - zustand
   const store_popUp_view_art_work = store((state) => state.popUp_view_art_work);
   const store_popUp_delete_art_work = store(
-    (state) => state.popUp_delete_art_work
+    (state) => state.popUp_delete_art_work,
   );
   const store_popUp_user_data = store((state) => state.popUp_user_data);
 
@@ -126,10 +126,11 @@ export function Layout({ children }) {
           )}
           <aside
             ref={menuProfileRef}
-            className={`absolute bottom-[-114px] left-[-16px] w-[165px] rounded-[10px] py-[12px] pl-[20px] shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] bg-white transition-all duration-500 ease-in-out  ${openMenuProfile
-              ? "block translate-y-[0px] opacity-[1]"
-              : "opacity-[0] translate-y-[-20px] invisible"
-              }`}
+            className={`absolute bottom-[-114px] left-[-16px] w-[165px] rounded-[10px] py-[12px] pl-[20px] shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] bg-white transition-all duration-500 ease-in-out  ${
+              openMenuProfile
+                ? "block translate-y-[0px] opacity-[1]"
+                : "opacity-[0] translate-y-[-20px] invisible"
+            }`}
           >
             <div>
               <p
@@ -157,13 +158,15 @@ export function Layout({ children }) {
 
       <aside className="pt-[58px] pl-[50px]">
         <div
-          className={`relative transition-blur duration-500 ${openMenuArtWorks ? "blur-[4px]" : ""
-            }`}
+          className={`relative transition-blur duration-500 ${
+            openMenuArtWorks ? "blur-[4px]" : ""
+          }`}
         >
           {children}
           <div
-            className={`absolute top-0 w-full h-full z-[3] opacity-[0] ${openMenuArtWorks ? "block" : "hidden"
-              }`}
+            className={`absolute top-0 w-full h-full z-[3] opacity-[0] ${
+              openMenuArtWorks ? "block" : "hidden"
+            }`}
           ></div>
         </div>
       </aside>
@@ -174,19 +177,22 @@ export function Layout({ children }) {
             <div>
               <HomeIcon
                 onClick={() => router.push("/web/home")}
-                className={`${openMenuArtWorks ? "mb-[8px]" : "mb-[2px]"
-                  } p-[5px] rounded-[3px] cursor-pointer transition-background transition-scale transition-margin duration-[0.3s] hover:bg-[#34345e] hover:scale-[0.9] `}
+                className={`${
+                  openMenuArtWorks ? "mb-[8px]" : "mb-[2px]"
+                } p-[5px] rounded-[3px] cursor-pointer transition-background transition-scale transition-margin duration-[0.3s] hover:bg-[#34345e] hover:scale-[0.9] `}
                 width={34}
                 color="white"
               />
 
               <AcademicCapIcon
                 ref={buttonmenuArtWorks}
-                className={`${openMenuArtWorks ? "mb-[8px]" : "mb-[2px]"
-                  } p-[5px] rounded-[3px] cursor-pointer transition-background transition-scale transition-margin duration-[0.4s] ${openMenuArtWorks
+                className={`${
+                  openMenuArtWorks ? "mb-[8px]" : "mb-[2px]"
+                } p-[5px] rounded-[3px] cursor-pointer transition-background transition-scale transition-margin duration-[0.4s] ${
+                  openMenuArtWorks
                     ? "scale-[1.2] bg-[#4e4e7c]"
                     : "hover:scale-[0.9] hover:bg-[#34345e]"
-                  } `}
+                } `}
                 width={34}
                 onClick={() =>
                   openMenuArtWorks
@@ -209,10 +215,11 @@ export function Layout({ children }) {
           {/* SECTION: ARTWORKS */}
           <section
             ref={menuArtWorks}
-            className={`absolute top-0 left-[51px] z-[6] flex-col pt-[78px] w-[190px]  pb-[10px] h-[100vh] border-solid border-r-[2px] bg-white shadow-[5px_0px_16px_rgba(0,0,0,0.2)] transition-all duration-[0.5s] ${openMenuArtWorks
-              ? "w-[190px] opacity-[1] translate-x-0 animate-increseWidth"
-              : "w-[220px] opacity-[0] translate-x-[10%] invisible"
-              }`}
+            className={`absolute top-0 left-[51px] z-[6] flex-col pt-[78px] w-[190px]  pb-[10px] h-[100vh] border-solid border-r-[2px] bg-white shadow-[5px_0px_16px_rgba(0,0,0,0.2)] transition-all duration-[0.5s] ${
+              openMenuArtWorks
+                ? "w-[190px] opacity-[1] translate-x-0 animate-increseWidth"
+                : "w-[220px] opacity-[0] translate-x-[10%] invisible"
+            }`}
           >
             <div
               onClick={() => {

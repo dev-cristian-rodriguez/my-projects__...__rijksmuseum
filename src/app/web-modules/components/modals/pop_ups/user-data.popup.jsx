@@ -2,7 +2,7 @@
 
 import Cookies from "js-cookie";
 import ReactCountryFlag from "react-country-flag";
-import Image from "next/image"
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import {
@@ -17,7 +17,7 @@ import Loader from "../../common/loader";
 
 import store from "@/app/web-modules/store/index.store";
 
-import defatulImage from "@/app/web-modules/assets/images/default_image.jpg"
+import defatulImage from "@/app/web-modules/assets/images/default_image.jpg";
 
 export default function UserData({ visibility }) {
   const emailCookie = Cookies.get("email");
@@ -86,7 +86,11 @@ export default function UserData({ visibility }) {
 
         <aside className="px-[40px]">
           <section className="relative inline-block">
-            <Image src={defatulImage} width={85} className="border-[4px] border-[#ffffff] rounded-[50%] mt-[-24px]" />
+            <Image
+              src={defatulImage}
+              width={85}
+              className="border-[4px] border-[#ffffff] rounded-[50%] mt-[-24px]"
+            />
 
             {/* <img
               className="border-[4px] border-[#ffffff] rounded-[50%] mt-[-24px]"
@@ -167,8 +171,9 @@ export default function UserData({ visibility }) {
                 />
                 <div className="ml-[10px] relative">
                   <p
-                    className={`absolute top-[-30px] bg-[#6564DB] text-[#ffffff] text-[11px] rounded-[6px] px-[10px] py-[5px] transition-opacity duration-500 ${copyIcon1 ? "opacity-100" : "opacity-0 invisible"
-                      }`}
+                    className={`absolute top-[-30px] bg-[#6564DB] text-[#ffffff] text-[11px] rounded-[6px] px-[10px] py-[5px] transition-opacity duration-500 ${
+                      copyIcon1 ? "opacity-100" : "opacity-0 invisible"
+                    }`}
                   >
                     Copiado
                   </p>
@@ -203,8 +208,9 @@ export default function UserData({ visibility }) {
                 />
                 <div className="ml-[10px] relative">
                   <p
-                    className={`absolute top-[-30px] bg-[#6564DB] text-[#ffffff] text-[11px] rounded-[6px] px-[10px] py-[5px] transition-opacity duration-500 ${copyIcon2 ? "opacity-100" : "opacity-0 delay-500"
-                      } ${copyIcon2 ? "visible" : "invisible"}`}
+                    className={`absolute top-[-30px] bg-[#6564DB] text-[#ffffff] text-[11px] rounded-[6px] px-[10px] py-[5px] transition-opacity duration-500 ${
+                      copyIcon2 ? "opacity-100" : "opacity-0 delay-500"
+                    } ${copyIcon2 ? "visible" : "invisible"}`}
                   >
                     Copiado
                   </p>
@@ -236,10 +242,11 @@ export default function UserData({ visibility }) {
               </button>
               <button
                 onClick={onClickUpdateUser}
-                className={`py-[6px] w-[47%] text-[#FFFFFF] text-[17px] font-normal rounded-[4px] border-[1px] transition-[background-color] duration-[0.15s] ease-[ease-in-out] ${loader
-                  ? "bg-[#595bbf] cursor-default"
-                  : "bg-[#6465DB] hover:bg-[#595bbf]"
-                  } `}
+                className={`py-[6px] w-[47%] text-[#FFFFFF] text-[17px] font-normal rounded-[4px] border-[1px] transition-[background-color] duration-[0.15s] ease-[ease-in-out] ${
+                  loader
+                    ? "bg-[#595bbf] cursor-default"
+                    : "bg-[#6465DB] hover:bg-[#595bbf]"
+                } `}
               >
                 {loader ? (
                   <div className="flex justify-center">

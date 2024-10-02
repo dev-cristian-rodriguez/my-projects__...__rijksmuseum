@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { BeatLoader } from "react-spinners";
 
 const Loader = ({ className, size, color }) => {

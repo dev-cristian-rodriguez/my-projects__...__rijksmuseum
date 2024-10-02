@@ -9,7 +9,7 @@ export async function POST(request) {
 
   try {
     await client.connect();
-    
+
     const user = await client.query("SELECT * FROM users WHERE email = $1", [
       requestBody.email,
     ]);
