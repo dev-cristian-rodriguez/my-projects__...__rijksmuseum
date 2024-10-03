@@ -11,7 +11,6 @@ import {
   BuildingLibraryIcon,
   HomeIcon,
   QuestionMarkCircleIcon,
-  GlobeAltIcon,
 } from "@heroicons/react/24/outline";
 
 import store from "../web-modules/store/index.store";

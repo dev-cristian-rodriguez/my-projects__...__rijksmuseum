@@ -9,6 +9,7 @@ import {
   XMarkIcon,
   ChatBubbleOvalLeftEllipsisIcon,
   ClipboardDocumentIcon,
+  UserIcon
 } from "@heroicons/react/24/outline";
 
 import ModalManager from "../modal-manager/modal-manager";
@@ -17,7 +18,6 @@ import Loader from "../../common/loader";
 
 import store from "@/app/web-modules/store/index.store";
 
-import defatulImage from "@/app/web-modules/assets/images/default_image.jpg";
 
 export default function UserData({ visibility }) {
   const emailCookie = Cookies.get("email");
@@ -86,11 +86,13 @@ export default function UserData({ visibility }) {
 
         <aside className="px-[40px]">
           <section className="relative inline-block">
-            <Image
+
+            <UserIcon width={65} className="border-[4px] p-[10px] border-[#ffffff] rounded-[50%] mt-[-24px] bg-[#1A1A32]" color="white"/>
+            {/* <Image
               src={defatulImage}
               width={85}
               className="border-[4px] border-[#ffffff] rounded-[50%] mt-[-24px]"
-            />
+            /> */}
 
             {/* <img
               className="border-[4px] border-[#ffffff] rounded-[50%] mt-[-24px]"
@@ -164,7 +166,7 @@ export default function UserData({ visibility }) {
                 <input
                   className="outline-none w-full bg-[#E5E7EB] text-[#647185] cursor-default "
                   type="text"
-                  value="+ 57 3144095260"
+                  value="+ 57 000-000-0000"
                   name="numbuer"
                   id="number"
                   readOnly
