@@ -21,8 +21,8 @@ export default function ViewArtWork({ visibility, imageUlr }) {
 
   return (
     <ModalManager
-      width={"550px"}
-      height={"550px"}
+      width={"450px"}
+      height={"450px"}
       isOpen={open}
       onClose={closePopUp}
     >

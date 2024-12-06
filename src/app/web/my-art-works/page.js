@@ -12,7 +12,6 @@ import {
   EyeIcon,
   AcademicCapIcon,
   TrashIcon,
-  ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
 
 import store from "@/app/web-modules/store/index.store";
@@ -138,14 +137,14 @@ export default function MyArtWork() {
             height={20}
             color="#464747"
           />
-          <p className="text-[13px] text-[#838D96] ">Artista</p>
+          <p className="text-[13px] text-[#838D96]">Artista</p>
         </div>
       ),
     },
   ];
 
   return (
-    <main className="mx-[24px] my-[18px]">
+    <main className="mx-[24px] mb-[18px] mt-[70px] sm:mt-[18px]">
       <h1 className="text-[#1f4d3a] text-[24px] font-semibold mb-[7px]">
         Mis obras de arte
       </h1>
@@ -153,10 +152,10 @@ export default function MyArtWork() {
         Administra y gestiona todos tus obras que se encuentran guardadas en tu
         base de datos .
       </p>
-      <article className="flex mt-[15px] mb-[22px]">
+      <article className="flex flex-col sm:flex-row mt-[15px] mb-[22px]">
         <div className="mr-[10px]">
           <div
-            className={`flex items-center py-[8px] pl-[15px] text-[14px] text-[#464747] w-[300px] rounded-[6px] border-[1px] border-gray-300`}
+            className={`flex items-center py-[8px] pl-[15px] text-[14px] text-[#464747] w-full sm:w-[300px] rounded-[6px] border-[1px] border-gray-300`}
           >
             <label htmlFor="search">
               <MagnifyingGlassIcon
@@ -167,7 +166,7 @@ export default function MyArtWork() {
             </label>
 
             <input
-              className="outline-none mr-[18px]"
+              className="outline-none mr-[18px] w-full"
               placeholder="Buscar"
               type="text"
               value={search}
@@ -185,7 +184,7 @@ export default function MyArtWork() {
                 : setOpenFilterMenu(true)
             }
             type="submit"
-            className={`flex cursor-pointer py-[8px] px-[12px] rounded-[5px] transition-background duration-[0.4s] ${openFilterMenu
+            className={`flex cursor-pointer py-[8px] px-[12px] rounded-[5px] mt-2 w-full justify-center sm:mt-0 transition-background duration-[0.4s] ${openFilterMenu
               ? "bg-[#e0e0eb]"
               : "bg-[#F2F4F7] hover:bg-[#e0e0eb]"
               }`}
@@ -197,7 +196,7 @@ export default function MyArtWork() {
           </button>
           <aside
             ref={filterMenurRef}
-            className={`absolute top-[42px] left-0 transition-opacity duration-[0.5s] ${openFilterMenu ? "opacity-100 block" : "opacity-0 invisible"
+            className={`absolute top-[55px] sm:top-[45px] left-0 transition-opacity duration-[0.5s] ${openFilterMenu ? "opacity-100 block" : "opacity-0 invisible"
               }`}
           >
             <Select
@@ -217,7 +216,79 @@ export default function MyArtWork() {
         </section>
       </article>
 
-      <section className="mt-[20px] mb-[30px]">
+      {/* Table in mobile version */}
+      {
+        artWorks?.length > 0 && (
+          artWorks?.map(item => {
+            return (
+              <section key={item.id} className="flex lg:hidden items-center gap-6 mb-6 w-full sm:w-[450px]">
+                <aside className="w-[10%]">
+                  <img
+                    className="rounded-[50%] w-[40px] h-[40px] object-cover"
+                    alt="artWorkImg"
+                    src={item.image_url}
+                  />
+                </aside>
+
+                <aside className="flex flex-col w-[80%]">
+                  <h1 className="text-[14px] truncate">
+                    {item.title
+                      ? item.title.length > 20
+                        ? `${item.title.substring(0, 20)} . . .`
+                        : item.title
+                      : "----"}
+                  </h1>
+                  <div className="text-[12px]">
+                    <span className="font-bold">Autor: {" "}</span>
+                    <span className="truncate">
+                      {item.principal_or_first_maker.length > 20
+                        ? `${item.principal_or_first_maker.substring(
+                          0,
+                          20,
+                        )} . . .`
+                        : item.principal_or_first_maker}
+                    </span>
+                    <span className="truncate"> 2050-04-25 </span>
+                  </div>
+                </aside>
+
+                <aside className="flex w-[12%]">
+                  <EyeIcon
+                    onClick={() => {
+                      store.setState({
+                        popUp_view_art_work: {
+                          visibility: true,
+                          imageUrl: item.image_url,
+                        },
+                      });
+                    }}
+                    color="#1f4d3a"
+                    className="cursor-pointer transition-color duration-[0.6s] hover:text-[#2f2f2f]"
+                    width={21}
+                  />
+
+                  <TrashIcon
+                    onClick={() => {
+                      store.setState({
+                        popUp_delete_art_work: {
+                          visibility: true,
+                          artWorkId: item.id_original,
+                        },
+                      });
+                    }}
+                    color="red"
+                    className="ml-[4px] cursor-pointer"
+                    width={21}
+                  />
+                </aside>
+              </section>
+            )
+          })
+        )
+      }
+
+      {/* Table in desktop version */}
+      <section className="mt-[20px] mb-[30px] hidden lg:block">
         <div className="grid grid-cols-4 gap-3 mb-[15px] text-[#1f4d3a] text-[14px] font-bold underline">
           <h2>Titulo</h2>
           <h2>Artista</h2>
@@ -227,38 +298,38 @@ export default function MyArtWork() {
         <hr className="bg-gray-200" />
 
         {/* -------------------------- */}
-        {artWorks && artWorks.length > 0 ? (
-          artWorks?.map((index) => {
+        {artWorks?.length > 0 && (
+          artWorks?.map((item) => {
             return (
-              <span key={index.id}>
+              <span key={item.id}>
                 <div className="grid grid-cols-4 gap-4 py-[4px] transition-background duration-[0.2s] hover:bg-[#f2f3f6]">
                   <div className="flex items-center">
                     <img
                       className="rounded-[50%] w-[35px] h-[35px] object-cover"
                       alt="artWorkImg"
-                      src={index.image_url}
+                      src={item.image_url}
                     />
-                    <h2 className="text-[#1f4d3a] text-[14px] font-[500] ml-[9px]">
-                      {index.title
-                        ? index.title.length > 15
-                          ? `${index.title.substring(0, 15)} . . .`
-                          : index.title
+                    <h2 className="text-[#1f4d3a] text-[14px] font-[500] ml-[9px] truncate">
+                      {item.title
+                        ? item.title.length > 15
+                          ? `${item.title.substring(0, 15)} . . .`
+                          : item.title
                         : "----"}
                     </h2>
                   </div>
                   <div className="flex items-center">
                     <h2 className="text-[#1f4d3a] text-[14px] font-[400]">
-                      {index.principal_or_first_maker.length > 20
-                        ? `${index.principal_or_first_maker.substring(
+                      {item.principal_or_first_maker.length > 20
+                        ? `${item.principal_or_first_maker.substring(
                           0,
                           20,
                         )} . . .`
-                        : index.principal_or_first_maker}
+                        : item.principal_or_first_maker}
                     </h2>
                   </div>
                   <div className="flex items-center">
                     <a
-                      href={index.link}
+                      href={item.link}
                       target="_blank"
                       className="text-blue-950 text-[14px] font-[400] cursor-pointer hover:underline"
                     >
@@ -275,7 +346,7 @@ export default function MyArtWork() {
                           store.setState({
                             popUp_view_art_work: {
                               visibility: true,
-                              imageUrl: index.image_url,
+                              imageUrl: item.image_url,
                             },
                           });
                         }}
@@ -289,7 +360,7 @@ export default function MyArtWork() {
                           store.setState({
                             popUp_delete_art_work: {
                               visibility: true,
-                              artWorkId: index.id_original,
+                              artWorkId: item.id_original,
                             },
                           });
                         }}
@@ -304,15 +375,23 @@ export default function MyArtWork() {
               </span>
             );
           })
-        ) : store_my_art_works === null ? (
-          <div className="flex justify-center mt-[100px]">
-            <span className="loader"></span>
-          </div>
-        ) : (
-          <h1 className="text-[#1f4d3a] text-[16px] font-semibold text-center mt-[100px]">
-            No se encontraron obras.
-          </h1>
         )}
+
+        {
+          store_my_art_works === null && (
+            <div className="flex justify-center mt-[100px]">
+              <span className="loader"></span>
+            </div>
+          )
+        }
+
+        {
+          artWorks?.length === 0 && store_my_art_works !== null && (
+            <h1 className="text-[#1f4d3a] text-[16px] font-semibold text-center mt-[100px]">
+              No se encontraron obras.
+            </h1>
+          )
+        }
         {/* -------------------------- */}
       </section>
     </main>

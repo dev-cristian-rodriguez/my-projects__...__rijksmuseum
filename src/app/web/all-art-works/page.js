@@ -24,6 +24,7 @@ export default function AllArtWork() {
   const [artWorks, setArtWorks] = useState(null);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [firstInteractionInput, setFirstInteractionInput] = useState(false);
 
   const [loadingContent, setLoadingContent] = useState(false);
 
@@ -40,11 +41,40 @@ export default function AllArtWork() {
       setArtWorks(data?.artObjects?.map(art_work => { return { ...art_work, isLoading: false } }));
       setLoadingContent(false);
     });
-  }, [page, search]);
+  }, [page]);
 
-  function onChangeSearch(e) {
-    setSearch(e.target.value);
-  }
+  useEffect(() => {
+    const inputSearch = search.trim().toLocaleLowerCase();
+
+    let timeoutId;
+
+    if (inputSearch) {
+      timeoutId = setTimeout(() => {
+        setFirstInteractionInput(true);
+        setArtWorks(null);
+        setLoadingContent(true);
+
+        getArtWorks({ page, search }).then((data) => {
+          setArtWorks(data?.artObjects?.map(art_work => { return { ...art_work, isLoading: false } }));
+          setLoadingContent(false);
+        });
+
+      }, 500);
+    } else if (firstInteractionInput && !inputSearch) {
+      setArtWorks(null);
+      setLoadingContent(true);
+
+      getArtWorks({ page }).then((data) => {
+        setArtWorks(data?.artObjects?.map(art_work => { return { ...art_work, isLoading: false } }));
+        setLoadingContent(false);
+      });
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [search]);
+
 
   async function addArtworkToUser(data) {
     const art_work_prop = data;
@@ -78,7 +108,7 @@ export default function AllArtWork() {
           }
           return art_work;
         }))
-        
+
         if (data.status === "fulfilled") {
           store.setState({ my_art_works: null });
           toast.success("Nueva obra agregada a tu base de datos");
@@ -89,10 +119,10 @@ export default function AllArtWork() {
   }
 
   return (
-    <main className="pl-[15px] pt-[15px]">
+    <main className="pl-[15px] pt-[60px] sm:pt-[15px]">
       <div className="flex justify-center mt-[15px]">
         <div
-          className={`flex items-center w-[400px] py-[8px] pl-[15px] text-[14px] text-[#464747] rounded-[6px] border-[1px] border-gray-300 shadow-[0_1px_10px_rgba(186,186,186,5)]`}
+          className={`flex items-center mx-2 w-[400px] py-[8px] pl-[15px] text-[14px] text-[#464747] rounded-[6px] border-[1px] border-gray-300 shadow-[0_1px_10px_rgba(186,186,186,5)]`}
         >
           <label htmlFor="search">
             <MagnifyingGlassIcon
@@ -109,7 +139,7 @@ export default function AllArtWork() {
             value={search}
             name="search"
             id="search"
-            onChange={onChangeSearch}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
       </div>
@@ -119,7 +149,7 @@ export default function AllArtWork() {
       </div>
 
       <div className="flex justify-center">
-        <article className="grid grid-cols-3 gap-x-10 mt-[35px]">
+        <article className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-10 gap-y-7 mt-[35px] m-auto">
           {loadingContent && (
             <div className="flex justify-center mt-[100px]">
               <span className="loader"></span>
@@ -132,7 +162,7 @@ export default function AllArtWork() {
                 return (
                   <aside
                     key={art_work.id}
-                    className="bg-[#ffff] w-[300px] rounded-[10px] mb-[40px] shadow-[0_1px_5px_rgba(186,186,186,1)]"
+                    className="bg-[#ffff] w-[93%] m-auto sm:w-[300px] rounded-[10px] shadow-[0_1px_5px_rgba(186,186,186,1)]"
                   >
                     <section className="relative">
                       <img

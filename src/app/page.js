@@ -182,8 +182,8 @@ export const Login = () => {
             alt="logo"
           />
 
-          <h1 className="mt-[85px] text-[22px] text-[#212B36] font-bold text-center">
-            Login
+          <h1 className="mt-[85px] text-[22px] text-[#1f4d3a] font-bold text-center">
+            Signin
           </h1>
 
           <div style={{
@@ -193,7 +193,7 @@ export const Login = () => {
             margin: "10px auto"
           }}></div>
 
-          <p className="mt-[10px] text-[#1f4d3a] text-[15px] underline">
+          <p className="mt-[10px] text-[#1f4d3a] text-[15px] underline text-center">
             Bienvenido a rijksmuseum, ingresa tu cuenta para empezar.
           </p>
 
@@ -203,7 +203,7 @@ export const Login = () => {
             className="mt-[30px] flex flex-col"
           >
             <label
-              className="text-[#212B36] text-[14px] font-[500] mb-[8px]"
+              className="text-[#1f4d3a] text-[14px] text-center font-[500] mb-[8px]"
               htmlFor="email"
             >
               Correo electrónico
@@ -231,7 +231,7 @@ export const Login = () => {
             </div>
 
             <label
-              className="text-[#212B36] text-[14px] mt-[13px] font-[500] mb-[8px]"
+              className="text-[#1f4d3a] text-[14px] text-center mt-[13px] font-[500] mb-[8px]"
               htmlFor="password"
             >
               Contraseña

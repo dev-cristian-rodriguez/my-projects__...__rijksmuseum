@@ -11,7 +11,7 @@ export default function Home() {
       }}
       className="flex justify-center w-[100%] h-[100vh]"
     >
-      <div className="flex justify-center flex-col w-[500px] h-[250px] border shadow-[0_0_60px_rgba(0,0,0,0.7)] bg-white text-center mt-[200px] p-5 rounded-[10px] border-solid border-[#ddd]">
+      <div className="flex justify-center flex-col w-[500px] mx-4 h-[250px] border shadow-[0_0_60px_rgba(0,0,0,0.7)] bg-white text-center mt-[200px] p-5 rounded-[10px] border-solid border-[#ddd]">
         <h1 title="error" className="text-[25px] text-[#333] font-semibold">
           Rijksmuseum
         </h1>
