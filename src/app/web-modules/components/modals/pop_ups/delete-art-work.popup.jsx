@@ -34,7 +34,7 @@ export default function DeleteArtWork({ visibility, artWorkId }) {
   }
 
   function closePopUp() {
-    if (!Loader) {
+    if (!loader) {
       store.setState({
         popUp_delete_art_work: { visibility: false },
       });
