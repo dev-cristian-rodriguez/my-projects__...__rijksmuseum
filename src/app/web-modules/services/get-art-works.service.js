@@ -3,7 +3,7 @@ const getArtWorks = async (art_work_params) => {
 
   let baseUrl = "https://www.rijksmuseum.nl";
   let path = `/api/en/collection/`;
-  let perPage = 14;
+  let perPage = 12;
 
   // Params
   path += `?key=${apiKey}`;

@@ -21,14 +21,14 @@ export default function ViewArtWork({ visibility, imageUlr }) {
 
   return (
     <ModalManager
-      width={"450px"}
-      height={null}
+      width={"550px"}
+      height={"550px"}
       isOpen={open}
       onClose={closePopUp}
     >
       <article className="rounded-[20px] bg-[#FFFFFF]">
         <aside>
-          <img width={"100%"} height={"100%"} src={imageUlr} />
+          <img width={"100%"} height={"100%"} src={imageUlr} className="object-cover" />
         </aside>
       </article>
     </ModalManager>

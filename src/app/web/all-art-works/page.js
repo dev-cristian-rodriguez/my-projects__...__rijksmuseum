@@ -25,6 +25,8 @@ export default function AllArtWork() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
 
+  const [loadingContent, setLoadingContent] = useState(false);
+
   useEffect(() => {
     if (!emailCookie) {
       router.push("/");
@@ -32,7 +34,12 @@ export default function AllArtWork() {
   }, [emailCookie]);
 
   useEffect(() => {
-    getArtWorks({ page, search }).then((data) => setArtWorks(data?.artObjects));
+    setArtWorks(null);
+    setLoadingContent(true);
+    getArtWorks({ page, search }).then((data) => {
+      setArtWorks(data?.artObjects?.map(art_work => { return { ...art_work, isLoading: false } }));
+      setLoadingContent(false);
+    });
   }, [page, search]);
 
   function onChangeSearch(e) {
@@ -40,6 +47,8 @@ export default function AllArtWork() {
   }
 
   async function addArtworkToUser(data) {
+    const art_work_prop = data;
+
     const body = {
       email: emailCookie,
       id_original: data.id,
@@ -49,12 +58,27 @@ export default function AllArtWork() {
       image_url: data.webImage.url,
     };
 
+    setArtWorks(prev => prev.map(art_work => {
+      if (art_work.id === data.id) {
+        return { ...art_work, isLoading: true }
+      }
+      return art_work;
+    }))
+
     await fetch("/api/art_works", {
       method: "POST",
       body: JSON.stringify(body),
     })
       .then((res) => res.json())
       .then((data) => {
+
+        setArtWorks(prev => prev.map(art_work => {
+          if (art_work.id === art_work_prop.id) {
+            return { ...art_work, isLoading: false }
+          }
+          return art_work;
+        }))
+        
         if (data.status === "fulfilled") {
           store.setState({ my_art_works: null });
           toast.success("Nueva obra agregada a tu base de datos");
@@ -96,7 +120,7 @@ export default function AllArtWork() {
 
       <div className="flex justify-center">
         <article className="grid grid-cols-3 gap-x-10 mt-[35px]">
-          {artWorks === null && (
+          {loadingContent && (
             <div className="flex justify-center mt-[100px]">
               <span className="loader"></span>
             </div>
@@ -110,21 +134,30 @@ export default function AllArtWork() {
                     key={art_work.id}
                     className="bg-[#ffff] w-[300px] rounded-[10px] mb-[40px] shadow-[0_1px_5px_rgba(186,186,186,1)]"
                   >
-                    <section className="relative ">
+                    <section className="relative">
                       <img
                         className="w-[100%] h-[200px] object-cover rounded-t-[10px]"
                         src={art_work?.webImage?.url}
                         alt="img"
                       />
-                      <HeartIcon
-                        title="Selecciona como favorita y guarda en tu base de datos"
-                        onClick={() => addArtworkToUser(art_work)}
-                        className="bg-[#ffff] rounded-full p-[6px] absolute top-[8px] right-[8px] cursor-pointer"
-                        width={50}
-                        color="red"
-                      />
+                      <div className="bg-[#ffff] rounded-full p-[6px] absolute top-[8px] right-[8px] flex justify-center items-center">
+                        {
+                          art_work.isLoading ? (
+                            <span className="loader"></span>
+                          ) : (
+                            <HeartIcon
+                              title="Selecciona como favorita y guarda en tu base de datos"
+                              onClick={() => addArtworkToUser(art_work)}
+                              className=""
+                              width={35}
+                              cursor={"pointer"}
+                              color="red" />
+                          )
+                        }
+                      </div>
+
                     </section>
-                    <h1 className="text-[#1A1A32] text-[17px] font-semibold py-[18px] text-center">
+                    <h1 className="text-[#1f4d3a] text-[17px] font-semibold py-[18px] text-center">
                       {art_work.longTitle.length > 10
                         ? art_work.longTitle.slice(0, 10) + " ..."
                         : art_work.longTitle}

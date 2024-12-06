@@ -92,7 +92,7 @@ export default function MyArtWork() {
       return store_my_art_works.result?.filter(
         (art_work) =>
           art_work.title.slice(0, inputSearch.length).toLocaleLowerCase() ===
-            inputSearch ||
+          inputSearch ||
           art_work.principal_or_first_maker
             .slice(0, inputSearch.length)
             .toLocaleLowerCase() === inputSearch,
@@ -146,17 +146,17 @@ export default function MyArtWork() {
 
   return (
     <main className="mx-[24px] my-[18px]">
-      <h1 className="text-[#1A1A32] text-[24px] font-semibold mb-[7px]">
+      <h1 className="text-[#1f4d3a] text-[24px] font-semibold mb-[7px]">
         Mis obras de arte
       </h1>
-      <p className="text-[#838D96] text-[14px]">
+      <p className="text-[#1f4d3a] text-[14px] underline">
         Administra y gestiona todos tus obras que se encuentran guardadas en tu
         base de datos .
       </p>
       <article className="flex mt-[15px] mb-[22px]">
         <div className="mr-[10px]">
           <div
-            className={`flex items-center py-[8px] pl-[15px] text-[14px] text-[#464747] rounded-[6px] border-[1px] border-gray-300`}
+            className={`flex items-center py-[8px] pl-[15px] text-[14px] text-[#464747] w-[300px] rounded-[6px] border-[1px] border-gray-300`}
           >
             <label htmlFor="search">
               <MagnifyingGlassIcon
@@ -185,22 +185,20 @@ export default function MyArtWork() {
                 : setOpenFilterMenu(true)
             }
             type="submit"
-            className={`flex cursor-pointer py-[8px] px-[12px] rounded-[5px] transition-background duration-[0.4s] ${
-              openFilterMenu
-                ? "bg-[#e0e0eb]"
-                : "bg-[#F2F4F7] hover:bg-[#e0e0eb]"
-            }`}
+            className={`flex cursor-pointer py-[8px] px-[12px] rounded-[5px] transition-background duration-[0.4s] ${openFilterMenu
+              ? "bg-[#e0e0eb]"
+              : "bg-[#F2F4F7] hover:bg-[#e0e0eb]"
+              }`}
           >
-            <FunnelIcon className="mr-[6px]" width={17} color="#1A1A32" />
-            <p className="text-[14px] text-[#1A1A32] font-semibold">
-              Filtrar por
+            <FunnelIcon className="mr-[6px]" width={17} color="#1f4d3a" />
+            <p className="text-[14px] text-[#1f4d3a] font-semibold">
+              Filtros
             </p>
           </button>
           <aside
             ref={filterMenurRef}
-            className={`absolute top-[42px] left-0 transition-opacity duration-[0.5s] ${
-              openFilterMenu ? "opacity-100 block" : "opacity-0 invisible"
-            }`}
+            className={`absolute top-[42px] left-0 transition-opacity duration-[0.5s] ${openFilterMenu ? "opacity-100 block" : "opacity-0 invisible"
+              }`}
           >
             <Select
               className="w-[300px]"
@@ -219,38 +217,12 @@ export default function MyArtWork() {
         </section>
       </article>
 
-      <hr className="mb-[15px] bg-gray-200" />
-
-      <h1 className="text-[#1A1A32] text-[16px] font-semibold">
-        Total de obras
-        {store_my_art_works
-          ? store_my_art_works.result.length > 0
-            ? store_my_art_works.result.length
-            : " 0"
-          : " . . ."}
-      </h1>
-
-      <section className="mt-[15px] mb-[30px]">
-        <div className="grid grid-cols-4 gap-3 mb-[15px]">
-          <div className="flex items-center">
-            <h2 className="text-[#1A1A32] text-[14px] font-[500]">Titulo</h2>
-            <ChevronUpDownIcon
-              className="ml-[2px]"
-              width={20}
-              color="#464747"
-            />
-          </div>
-          <div className="flex items-center">
-            <h2 className="text-[#1A1A32] text-[14px] font-[500]">Artista</h2>
-          </div>
-
-          <div className="flex items-center">
-            <h2 className="text-[#1A1A32] text-[14px] font-[500]">Link</h2>
-          </div>
-
-          <div className="flex items-center">
-            <h2 className="text-[#1A1A32] text-[14px] font-[500]">Creado</h2>
-          </div>
+      <section className="mt-[20px] mb-[30px]">
+        <div className="grid grid-cols-4 gap-3 mb-[15px] text-[#1f4d3a] text-[14px] font-bold underline">
+          <h2>Titulo</h2>
+          <h2>Artista</h2>
+          <h2>Link</h2>
+          <h2>Creado</h2>
         </div>
         <hr className="bg-gray-200" />
 
@@ -266,7 +238,7 @@ export default function MyArtWork() {
                       alt="artWorkImg"
                       src={index.image_url}
                     />
-                    <h2 className="text-[#838D96] text-[14px] font-[500] ml-[9px]">
+                    <h2 className="text-[#1f4d3a] text-[14px] font-[500] ml-[9px]">
                       {index.title
                         ? index.title.length > 15
                           ? `${index.title.substring(0, 15)} . . .`
@@ -275,12 +247,12 @@ export default function MyArtWork() {
                     </h2>
                   </div>
                   <div className="flex items-center">
-                    <h2 className="text-[#838D96] text-[14px] font-[400]">
+                    <h2 className="text-[#1f4d3a] text-[14px] font-[400]">
                       {index.principal_or_first_maker.length > 20
                         ? `${index.principal_or_first_maker.substring(
-                            0,
-                            20,
-                          )} . . .`
+                          0,
+                          20,
+                        )} . . .`
                         : index.principal_or_first_maker}
                     </h2>
                   </div>
@@ -288,13 +260,13 @@ export default function MyArtWork() {
                     <a
                       href={index.link}
                       target="_blank"
-                      className="text-[#838D96] text-[14px] font-[400] cursor-pointer hover:underline"
+                      className="text-blue-950 text-[14px] font-[400] cursor-pointer hover:underline"
                     >
                       Enlace directo a la obra oficial
                     </a>
                   </div>
                   <div className="flex items-center justify-between pr-[10px]">
-                    <h2 className="text-[#838D96] text-[14px] font-[400]">
+                    <h2 className="text-[#1f4d3a] text-[14px] font-[400]">
                       2050-04-25
                     </h2>
                     <div className={`flex`}>
@@ -307,7 +279,8 @@ export default function MyArtWork() {
                             },
                           });
                         }}
-                        className="cursor-pointer text-[#838D96] transition-color duration-[0.6s] hover:text-[#2f2f2f]"
+                        color="#1f4d3a"
+                        className="cursor-pointer transition-color duration-[0.6s] hover:text-[#2f2f2f]"
                         width={21}
                       />
 
@@ -320,7 +293,8 @@ export default function MyArtWork() {
                             },
                           });
                         }}
-                        className="ml-[4px] cursor-pointer text-[#838D96] transition-color duration-[0.6s] hover:text-[#2f2f2f]"
+                        color="red"
+                        className="ml-[4px] cursor-pointer"
                         width={21}
                       />
                     </div>
@@ -335,8 +309,8 @@ export default function MyArtWork() {
             <span className="loader"></span>
           </div>
         ) : (
-          <h1 className="text-[#1A1A32] text-[16px] font-semibold text-center mt-[100px]">
-            No se encontraron obras .
+          <h1 className="text-[#1f4d3a] text-[16px] font-semibold text-center mt-[100px]">
+            No se encontraron obras.
           </h1>
         )}
         {/* -------------------------- */}

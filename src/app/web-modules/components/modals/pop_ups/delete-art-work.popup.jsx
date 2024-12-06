@@ -34,9 +34,11 @@ export default function DeleteArtWork({ visibility, artWorkId }) {
   }
 
   function closePopUp() {
-    store.setState({
-      popUp_delete_art_work: { visibility: false },
-    });
+    if (!Loader) {
+      store.setState({
+        popUp_delete_art_work: { visibility: false },
+      });
+    }
     return;
   }
 
@@ -47,45 +49,39 @@ export default function DeleteArtWork({ visibility, artWorkId }) {
       isOpen={open}
       onClose={closePopUp}
     >
-      <article className="rounded-[10px] bg-[#FFFFFF] pb-[20px]">
+      <article className="rounded-[10px] bg-[#FFFFFF]">
         <aside className="flex justify-end mx-[13px] pt-[13px]">
           <XMarkIcon
             onClick={closePopUp}
-            className="cursor-pointer text-[#1A1A32] w-[27px] h-[27px]"
+            className="cursor-pointer text-[#1f4d3a] w-[27px] h-[27px]"
           />
         </aside>
 
         <aside className="px-[40px] mt-[7px]">
           <h1 className="text-[#0f172a] text-[20px] font-semibold">
-            ¡Atención!
+            ¡Información importante!
           </h1>
-          <p className="text-[#647185] text-[14px] py-[27px]">
+          <p className="text-[#1f4d3a] text-[14px] py-[27px] underline">
             Al realizar esta acción, se borrara la obra de arte seleccionada de
             tu base de datos junto a su información. <br />
-            <span className="font-bold">
-              Esto no borra las obras de arte del home.
-            </span>
           </p>
 
           <div className="flex justify-between mt-[3px]">
             <button
               onClick={closePopUp}
-              className="py-[6px] w-[47%] text-[#1A1A32] text-[17px] font-normal rounded-[4px] border-[1px] border-[#D1D5DB]"
+              className="py-[6px] w-[47%] text-[#1f4d3a] text-[15px] font-bold underline rounded-[50px] border-[1px] border-[#1f4d3a]"
             >
               Cancelar
             </button>
             <button
               onClick={onClickDeleteArtWork}
-              className={`py-[6px] w-[47%] text-[#FFFFFF] text-[17px] font-normal rounded-[4px] border-[1px] transition-[background-color] duration-[0.15s] ease-[ease-in-out] ${
-                loader
+              className={`py-[6px] w-[47%] text-[#FFFFFF] text-[15px] font-bold underline rounded-[50px] border-[1px] transition-[background-color] duration-[0.15s] ease-[ease-in-out] ${loader
                   ? "bg-[#b33535] cursor-default"
                   : "bg-[#DC2626] hover:bg-[#b33535]"
-              } `}
+                } `}
             >
               {loader ? (
-                <div className="flex justify-center">
-                  <Loader color={"#CCCCCC"} size={16} />
-                </div>
+                "Cargando..."
               ) : (
                 "Borrar"
               )}

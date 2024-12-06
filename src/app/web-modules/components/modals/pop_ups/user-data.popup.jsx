@@ -80,14 +80,14 @@ export default function UserData({ visibility }) {
         <aside className="flex justify-end py-[16px] bg-[#DFE4EA]">
           <XMarkIcon
             onClick={closePopUp}
-            className="cursor-pointer mr-[9px] text-[#1A1A32] w-[28px] h-[28px] "
+            className="cursor-pointer mr-[9px] text-[#1f4d3a] w-[28px] h-[28px] "
           />
         </aside>
 
         <aside className="px-[40px]">
           <section className="relative inline-block">
 
-            <UserIcon width={65} className="border-[4px] p-[10px] border-[#ffffff] rounded-[50%] mt-[-24px] bg-[#1A1A32]" color="white"/>
+            <UserIcon width={65} className="border-[4px] p-[10px] border-[#ffffff] rounded-[50%] mt-[-24px] bg-[#1f4d3a]" color="white"/>
             {/* <Image
               src={defatulImage}
               width={85}
@@ -136,14 +136,14 @@ export default function UserData({ visibility }) {
 
           <section className="flex flex-col mt-[21px]">
             <label htmlFor="search">
-              <p className="mb-[5px] text-[14px] text-[#1A1A32]">
+              <p className="mb-[5px] text-[14px] text-[#1f4d3a]">
                 Nombre
                 <span className="text-red-600 text-[18px]">*</span>
               </p>
             </label>
 
             <input
-              className="outline-none py-[8px] pl-[15px] text-[14px] text-[#1A1A32] rounded-[6px] border-[1px] border-gray-300"
+              className="outline-none py-[8px] pl-[15px] text-[14px] text-[#1f4d3a] rounded-[6px] border-[1px] border-gray-300"
               placeholder="Nombre"
               type="text"
               value={name}
@@ -156,13 +156,13 @@ export default function UserData({ visibility }) {
           <section className="flex justify-between mt-[23px] ">
             <div className="w-[45%] ">
               <label htmlFor="number">
-                <p className="mb-[5px] text-[14px] text-[#1A1A32]">
+                <p className="mb-[5px] text-[14px] text-[#1f4d3a]">
                   Teléfono
                   <span className="text-red-600 text-[18px]">*</span>
                 </p>
               </label>
 
-              <div className="flex py-[8px] pl-[15px] bg-[#E5E7EB] text-[14px] text-[#1A1A32] rounded-[6px] border-[1px] border-gray-300">
+              <div className="flex py-[8px] pl-[15px] bg-[#E5E7EB] text-[14px] text-[#1f4d3a] rounded-[6px] border-[1px] border-gray-300">
                 <input
                   className="outline-none w-full bg-[#E5E7EB] text-[#647185] cursor-default "
                   type="text"
@@ -193,13 +193,13 @@ export default function UserData({ visibility }) {
             </div>
             <div className="w-[50%] ">
               <label htmlFor="email">
-                <p className="mb-[5px] text-[14px] text-[#1A1A32]">
+                <p className="mb-[5px] text-[14px] text-[#1f4d3a]">
                   Correo electrónico
                   <span className="text-red-600 text-[18px]">*</span>
                 </p>
               </label>
 
-              <div className="flex py-[8px] pl-[15px] bg-[#E5E7EB] text-[14px] text-[#1A1A32] rounded-[6px] border-[1px] border-gray-300">
+              <div className="flex py-[8px] pl-[15px] bg-[#E5E7EB] text-[14px] text-[#1f4d3a] rounded-[6px] border-[1px] border-gray-300">
                 <input
                   className="outline-none w-full bg-[#E5E7EB] text-[#647185] cursor-default "
                   placeholder="Correo Electronico"
